@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="notification is-primary global-notification">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger global-notification">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <%= link_to root_path, class: "navbar-item" do %>
@@ -61,13 +72,19 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if user_signed_in? %>
-                <p class="control">
+                <a class="control">
                   <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
-                </p>
-                <%= button_to("Logout", destroy_user_session_path, method: :delete, class:"button is-info") %>
+                </a>
+                <a class="control">
+                  <%= button_to("Logout", destroy_user_session_path, method: :delete, class:"button is-info") %>
+                </a>  
               <% else %>
-                <%= link_to 'Sign Up', new_user_registration_path, class: "button is-primary" %>
-                <%= link_to 'Sign In', new_user_session_path, class: "button is-light" %>
+                <a class="control">
+                  <%= link_to 'Sign Up', new_user_registration_path, class: "button is-primary" %>
+                </a>
+                <a class="control">
+                  <%= link_to 'Sign In', new_user_session_path, class: "button is-light" %>
+                </a>  
               <% end %>    
             </div>
           </div>
