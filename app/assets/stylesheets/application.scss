@@ -19,3 +19,11 @@
  .notification.is-danger.global-notification, .notification.is-primary.global-notification {
     margin-bottom: 0;
  }
+
+ .columns {
+    flex-direction: column;
+ }
+
+ .level {
+    flex-direction: row-reverse;
+ }
