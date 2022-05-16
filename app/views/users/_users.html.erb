@@ -1,0 +1,23 @@
+<% User.all.each do |user| %>
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="https://bulma.io/images/placeholders/64x64.png">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div class="content">
+          <%= user.name %><br />
+        </div>
+        <nav class="level">
+          <div class="level-left is-mobile">
+            <%= link_to current_user.befriend(user), class: "level-item" do %>
+              <p>Send friend request</p>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </article>
+  </div>
+<% end%>

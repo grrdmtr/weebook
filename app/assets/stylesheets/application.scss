@@ -20,8 +20,8 @@
     margin-bottom: 0;
  }
 
- .columns {
-    flex-direction: column;
+ .columns #people {
+    width: max(200px)
  }
 
  .level {

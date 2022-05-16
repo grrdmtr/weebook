@@ -1,11 +1,13 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      <div class="row">
+      <div class="column">
         <%= render 'form' %>
-      </div>
-      <div class="row">
         <%= render 'feed' %>
+      </div>
+      <div class="column" id="people">
+        <h2><strong>People you might know:</strong></h2>
+        <%= render 'users/users' %>
       </div>
     </div>
   </div>
