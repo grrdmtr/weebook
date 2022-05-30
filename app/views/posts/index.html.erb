@@ -3,12 +3,16 @@
     <div class="columns">
       <div class="column">
         <%= render 'form' %>
-        <%= render 'feed' %>
-      </div>
-      <div class="column" id="people">
-        <h2><strong>People you might know:</strong></h2>
-        <%= render 'users/users' %>
-      </div>
+        <div class="columns is-mobile">
+          <div class="column is-three-quarters">
+            <%= render 'feed' %>
+          </div>
+          <div class="column" id="people">
+            <h2><strong>People you might know:</strong></h2>
+            <%= render 'users/users' %>
+          </div>
+        </div>  
+      </div>  
     </div>
   </div>
 </section>

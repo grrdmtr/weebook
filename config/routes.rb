@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  get 'friends/index'
+  get 'friends/destroy'
   resources :users
+  resources :friend_requests do
+    member do
+      post :accept
+      post :reject
+    end
+  end
   resources :posts
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
   root 'posts#index'
 end

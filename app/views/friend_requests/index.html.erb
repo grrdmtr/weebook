@@ -1,0 +1,10 @@
+<section class="section">
+  <h1 class="title is-1">Friend requests</h1>
+  <% if @incoming.any? %>
+    <% @incoming.each do |friend_request| %>
+        <li><%= friend_request.user.name%> - <%= render 'accept_or_deny', user_id: friend_request.user.id, user: friend_request.user %></li>
+      <% end %>
+  <% else %>
+    <p>You have no pending friend requests!</p>
+  <% end %>
+</section>
