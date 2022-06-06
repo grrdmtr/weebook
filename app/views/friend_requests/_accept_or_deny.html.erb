@@ -1,15 +1,17 @@
 <div class='users-container'>
   <% @incoming.each do |f| %>
-    <div class='pending-user friend-obj'>
-      <div class='avatar-name'>
-        <div class='pending-name pending-layer'>
-          <%= link_to User.find(f.user_id).name, user_path(f.user_id) %>
+    <% unless current_user.friends.include?(f.user) %>
+      <div class='pending-user friend-obj'>
+        <div class='avatar-name'>
+          <div class='pending-name pending-layer'>
+            <%= f.user.name %>
+          </div>
+        </div>
+        <div class='pending-choices pending-layer'>
+          <span><%= button_to "Accept", accept_friend_request_path(f.user_id), method: :post, class: 'button is-primary' %></span>
+          <span><%= button_to "Reject", reject_friend_request_path(f.user_id), method: :post, class: 'button is-danger' %></span>
         </div>
       </div>
-      <div class='pending-choices pending-layer'>
-        <span><%= button_to "Accept", accept_friend_request_path(f.user_id), method: :post, class: 'button is-primary' %></span>
-        <span><%= button_to "Reject", reject_friend_request_path(f.user_id), method: :post, class: 'button is-danger' %></span>
-      </div>
-    </div>
+    <% end %>  
   <% end %>
 </div>

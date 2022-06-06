@@ -36,10 +36,16 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    if !@friend_request.nil?
-      @friend_request.destroy
-    end
+    @friend_request = FriendRequest.where(user_id: current_user.id, friend_id: params[:id])
+    @friend_request.destroy_all
     head :no_content
+  end
+
+  def delete
+    @friend_request = FriendRequest.find(params[:id])
+    @friend_request.destroy
+    flash[:success] = "The friend request was canceled."
+    redirect_to root_url
   end
 
   private
