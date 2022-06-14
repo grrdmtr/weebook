@@ -36,7 +36,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    @friend_request = FriendRequest.where(user_id: current_user.id, friend_id: params[:id])
+    @friend_request = FriendRequest.where(user_id: params[:id], friend_id: current_user.id)
     @friend_request.destroy_all
     head :no_content
   end
