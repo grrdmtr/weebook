@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
+  root 'posts#index'
+  
+  resources :posts do
+    resources :likes
+  end
+
   get 'friends/index'
   get 'friends/destroy'
   resources :users
@@ -10,7 +16,5 @@ Rails.application.routes.draw do
       post :reject
     end
   end
-  resources :posts
 
-  root 'posts#index'
 end

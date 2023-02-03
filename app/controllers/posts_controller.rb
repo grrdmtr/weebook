@@ -1,10 +1,15 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[like show edit update destroy ]
 
   def index
     @posts = Post.all.order('created_at DESC')
     @post = Post.new
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    @post.likes << current_user unless @post.likes.ids.include?(current_user.id)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -67,6 +72,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :user_id, :post_id)
   end
 end

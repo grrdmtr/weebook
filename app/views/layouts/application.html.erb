@@ -42,7 +42,7 @@
             <div class="buttons">
               <% if user_signed_in? %>
                 <a class="control">
-                  <%= link_to current_user.name, edit_user_registration_path, class: "button is-info" %>
+                  <%= link_to current_user.name, "/users/show", class: "button is-info" %>
                 </a>
                 <a class="control">
                   <%= link_to "Notifications", "/friend_requests/", class: "button is-info" %>

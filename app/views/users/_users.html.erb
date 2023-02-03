@@ -9,7 +9,7 @@
         </div>
         <div class="media-content">
           <div class="content">
-            <%= user.name %><br />
+            <%= link_to user.name, user_path(user.id) %><br />
           </div>
           <nav class="level">
             <div class="level-left is-mobile">
