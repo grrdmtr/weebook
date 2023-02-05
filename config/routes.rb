@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'posts#index'
-  
+
   resources :posts do
     resources :likes
+    resources :comments
   end
 
   get 'friends/index'

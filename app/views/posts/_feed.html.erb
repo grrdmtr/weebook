@@ -63,5 +63,11 @@
             </nav>
         </div>
       </article>
+      <article class="media">
+        <%= render "comments/comments", post: post %>
+      </article>
+      <article class="media">
+        <%= render "comments/form", post: post %>
+      </article>
     </div>
 <% end %>

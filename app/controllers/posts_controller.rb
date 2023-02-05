@@ -7,11 +7,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def like
-    @post = Post.find(params[:id])
-    @post.likes << current_user unless @post.likes.ids.include?(current_user.id)
-  end
-
   # GET /posts/1 or /posts/1.json
   def show
   end
