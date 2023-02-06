@@ -1,10 +1,25 @@
-<h1>Editing post</h1>
-
-<%= render "form", post: @post %>
-
-<br>
-
-<div>
-  <%= link_to "Show this post", @post %> |
-  <%= link_to "Back to posts", posts_path %>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h1 class="title">Editing post</h1>
+        <article class="media">
+          <div class="media-left">
+            <figure class="image is-64x64">
+              <img src="https://bulma.io/images/placeholders/64x64.png">
+            </figure>
+          </div>
+          <div class="media-content">
+            <div class="content">
+              <strong><%= @post.user.name %></strong><br />
+              <p><%= render "form", post: @post %></p>
+            </div>
+          </div>
+        </article>
+        <div>
+          <%= link_to "Back to posts", posts_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
