@@ -14,15 +14,14 @@
           <nav class="level">
             <div class="level-left is-mobile">
               <% if FriendRequest.where(user_id: current_user.id, friend_id: user.id).exists? %>
-                <p>Friend request sent</p>
-                <%# <%= button_to friend_requests_path(FriendRequest.where(user_id: current_user.id, friend_id: user.id)[:id]), method: :delete, class: "level-item" do %>
-                  <%# <p>Cancel friend request</p>
-                <% end %>
+               <%# <%= button_to friend_requests_path(id: user.id), method: :delete, class: "button is-link is-light" do %>
+                  <button class= "button is-link is-light">Cancel friend request</button>
+                <%#<% end %>
               <% elsif FriendRequest.where(user_id: user.id, friend_id: current_user.id).exists? %>
                 <span><%= button_to "Accept", accept_friend_request_path(user.id), method: :post, class: 'button is-primary' %></span>
                 <span><%= button_to "Reject", reject_friend_request_path(user.id), method: :post, class: 'button is-danger' %></span>
               <% else %>
-                <%= button_to friend_requests_path(friend_id: user.id), method: :post, class: "level-item" do %>
+                <%= button_to friend_requests_path(friend_id: user.id), method: :post, class: "button is-link is-light" do %>
                   <p>Send friend request</p>
                 <% end %>
               <% end %> 

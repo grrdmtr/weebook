@@ -45,7 +45,7 @@
                   <%= link_to current_user.name, "/users/show", class: "button is-info" %>
                 </a>
                 <a class="control">
-                  <%= link_to "Notifications", "/friend_requests/", class: "button is-info" %>
+                  <%= link_to "Notifications", user_friend_requests_path(current_user.id), class: "button is-info" %>
                 </a>
                 <a class="control">
                   <%= button_to("Logout", destroy_user_session_path, method: :delete, class:"button is-info") %>

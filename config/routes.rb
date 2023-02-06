@@ -8,14 +8,12 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :users do
+    resources :friend_requests
+    resources :posts
+  end
+  
   get 'friends/index'
   get 'friends/destroy'
-  resources :users
-  resources :friend_requests do
-    member do
-      post :accept
-      post :reject
-    end
-  end
 
 end

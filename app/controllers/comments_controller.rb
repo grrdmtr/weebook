@@ -14,6 +14,12 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
+    if @comment.save
+      flash[:notice] = 'Comment posted'
+      redirect_to root_path
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
