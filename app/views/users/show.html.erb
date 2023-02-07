@@ -3,15 +3,17 @@
 <div class="section">
   <div class="container">
     <div class="columns">
+      <div class="column">
+        <h2 class="title is-2"><%= current_user.name %>'s profile</h2>
+      </div>
+
+        <%= link_to "Edit profile", edit_user_registration_path, class: "button is-info" %>
+
+    </div>
+  </div>  
+    <div class="columns">
       <div class="column is-4">
-
-        <div class="field">
-          <div class="control">
-            <%= link_to "Edit profile", edit_user_registration_path, class: "button is-info" %>
-          </div>
-        </div>
-
-        <h2 class="title is-2">Friendlist</h2>
+        <h3 class="title is-3">Friendlist</h3>
 
         <% current_user.friends.each do |f| %>
           <article class="media">
@@ -27,7 +29,24 @@
             </div>
           </article>  
         <% end %>
-
+      </div>
+      <div class="column is-4">
+        <h3 class="title is-3"><%= current_user.name %>'s posts</h3>
+        <% current_user.posts.each do |post| %>
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/64x64.png">
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <strong><%= post.user.name %></strong><br/>
+                <p><%= post.content %></p>
+              </div>
+            </div>
+          </article>
+        <% end %>
       </div>
     </div>
   </div>
