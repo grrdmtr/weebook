@@ -14,16 +14,39 @@
           <nav class="level">
             <div class="level-left is-mobile">
               <% if FriendRequest.where(user_id: current_user.id, friend_id: user.id).exists? %>
-               <%# <%= button_to friend_requests_path(id: user.id), method: :delete, class: "button is-link is-light" do %>
-                  <button class= "button is-link is-light">Cancel friend request</button>
-                <%#<% end %>
+                <span><%= button_to "Cancel friend request",
+                          user_friend_request_path(user.id, current_user.id),
+                          method: :delete,
+                          params: { friend_request: { user_id: current_user.id,
+                                                      friend_id: user.id
+                                                    }
+                                  },
+                          class: "button is-link is-light" %></span>
               <% elsif FriendRequest.where(user_id: user.id, friend_id: current_user.id).exists? %>
-                <span><%= button_to "Accept", friend_request_path(user.id), method: :accept, class: 'button is-primary' %></span>
-                <span><%= button_to "Reject", friend_request_path(user.id), method: :reject, class: 'button is-danger' %></span>
+                <span><%= button_to "Accept",
+                          user_friend_request_path(user.id, current_user.id),
+                          method: :accept,
+                          params: { friend_request: { user_id: user.id,
+                                              friend_id: current_user.id
+                                            }
+                                  },
+                          class: 'button is-primary' %></span>
+                <span><%= button_to "Reject", user_friend_request_path(user.id, current_user.id),
+                          method: :reject,
+                          params: { friend_request: { user_id: current_user.id,
+                                                      friend_id: user.id
+                                                    }
+                                  },
+                          class: 'button is-danger' %></span>
               <% else %>
-                <%= button_to friend_requests_path(friend_id: user.id), method: :post, class: "button is-link is-light" do %>
-                  <p>Send friend request</p>
-                <% end %>
+                <span><%= button_to "Send friend request",
+                          user_friend_request_path(current_user.id,user.id),
+                          method: :post,
+                          params: { friend_request: { user_id: current_user.id,
+                                                            friend_id: user.id
+                                                          }
+                                        },
+                          class: "button is-link is-light" %></span>
               <% end %> 
             </div>
           </nav>
