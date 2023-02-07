@@ -4,6 +4,10 @@ class FriendRequestsController < ApplicationController
     @outgoing = current_user.friend_requests
   end
 
+  def new
+    @friend_request = FriendRequest.new
+  end
+
   def create
     friend = User.find(params[:friend_id])
     @friend_request = current_user.friend_requests.create(friend: friend)
@@ -12,7 +16,8 @@ class FriendRequestsController < ApplicationController
       flash[:notice] = 'Friend request sent'
       redirect_to root_path
     else
-      render json: @friend_request.errors, status: :unprocessable_entity
+      flash[:notice] = 'Something went wrong'
+      redirect_to root_path
     end
   end
 
