@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_one :profile, dependent: :destroy
+
   def remove_friend(friend)
     current_user.friends.destroy(friend)
   end

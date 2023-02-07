@@ -4,18 +4,30 @@
   <div class="container">
     <div class="columns">
       <div class="column">
-        <h2 class="title is-2"><%= current_user.name %>'s profile</h2>
+        <h2 class="title is-2"><%= @user.name %>'s profile</h2>
       </div>
-
+      <% if current_user == @user %>
         <%= link_to "Edit profile", edit_user_registration_path, class: "button is-info" %>
-
+      <% end %>
     </div>
   </div>  
     <div class="columns">
-      <div class="column is-4">
+      <div class="column is-3">
+        <h3 class="title is-3">Personal info</h3>
+        <article class="media">
+          <div class="content">
+            <p>Name: <%= @user.name %></p>
+            <p>Gender: <%= @user.gender %></p>
+            <% unless @user.birthday.nil? %>
+              <p>Birthday: <%= @user.birthday %>
+            <% end %>
+          </div>
+        </article>
+      </div>
+      <div class="column is-3">
         <h3 class="title is-3">Friendlist</h3>
 
-        <% current_user.friends.each do |f| %>
+        <% @user.friends.each do |f| %>
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
@@ -30,19 +42,31 @@
           </article>  
         <% end %>
       </div>
-      <div class="column is-4">
-        <h3 class="title is-3"><%= current_user.name %>'s posts</h3>
-        <% current_user.posts.each do |post| %>
+      <div class="column is-5">
+        <h3 class="title is-3">Posts</h3>
+        <% @user.posts.reverse_each do |post| %>
           <article class="media">
             <div class="media-left">
               <figure class="image is-64x64">
                 <img src="https://bulma.io/images/placeholders/64x64.png">
               </figure>
             </div>
-            <div class="media-content">
-              <div class="content">
-                <strong><%= post.user.name %></strong><br/>
-                <p><%= post.content %></p>
+            <div class="box">
+              <div class="media-content">
+                <div class="content">
+                  <strong><%= post.user.name %></strong> - <%= post.created_time_formatted %> <br/>
+                  <p><%= post.content %></p>
+                </div>
+                <div class="level-left">
+                  <a class="level-item">
+                  <%= turbo_frame_tag "post_#{post.id}_like_count" do %>
+                    <%= pluralize(post.likes.count, "Like") %></a>
+                  <% end %>
+                  </a>
+                  <a class="level-item"> 
+                    <%= pluralize(post.comments.count, "Comment") %>
+                  </a>
+                </div>
               </div>
             </div>
           </article>
