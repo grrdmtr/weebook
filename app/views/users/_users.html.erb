@@ -23,9 +23,9 @@
                                   },
                           class: "button is-link is-light" %></span>
               <% elsif FriendRequest.where(user_id: user.id, friend_id: current_user.id).exists? %>
+              <% friend_request = FriendRequest.find_by user_id: user.id, friend_id: current_user.id %>
                 <span><%= button_to "Accept",
-                          user_friend_request_path(user.id, current_user.id),
-                          method: :accept,
+                          user_friend_request_accept_path(user.id, friend_request.id),
                           params: { friend_request: { user_id: user.id,
                                               friend_id: current_user.id
                                             }
@@ -39,12 +39,12 @@
                                   },
                           class: 'button is-danger' %></span>
               <% else %>
-                <span><%= button_to "Send friend request",
-                          user_friend_request_path(current_user.id,user.id),
+                <span><%= button_to "Add friend",
+                          user_friend_requests_path(user.id),
                           method: :post,
                           params: { friend_request: { user_id: current_user.id,
                                                             friend_id: user.id
-                                                          }
+                                                    }
                                         },
                           class: "button is-link is-light" %></span>
               <% end %> 

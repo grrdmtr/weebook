@@ -9,11 +9,9 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :friend_requests
+    resources :friend_requests do
+      get :accept
+    end
     resources :posts
   end
-  
-  get 'friends/index'
-  get 'friends/destroy'
-
 end

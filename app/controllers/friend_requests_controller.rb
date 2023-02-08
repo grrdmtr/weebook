@@ -9,8 +9,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def create
-    friend = User.find(params[:friend_id])
-    @friend_request = current_user.friend_requests.create(friend: friend)
+    @friend_request = current_user.friend_requests.build(friend_request_params)
 
     if @friend_request.save
       flash[:notice] = 'Friend request sent'
@@ -41,9 +40,10 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    @friend_request = FriendRequest.where(user_id: params[:id], friend_id: current_user.id)
+    @friend_request = FriendRequest.where(friend_request_params)
     @friend_request.destroy_all
-    head :no_content
+    flash[:notice] = "The friend request was canceled."
+    redirect_to root_url
   end
 
   def delete
