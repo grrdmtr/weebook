@@ -13,11 +13,10 @@ class FriendRequestsController < ApplicationController
 
     if @friend_request.save
       flash[:notice] = 'Friend request sent'
-      redirect_to root_path
     else
       flash[:notice] = 'Something went wrong'
-      redirect_to root_path
     end
+    redirect_to root_path
   end
 
   def update
@@ -26,7 +25,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def accept
-    friend = User.find(params[:id])
+    friend = User.find(params[:user_id])
     current_user.friends << friend
     flash[:notice] = "Friend request accepted"
     redirect_back fallback_location: root_path
@@ -40,7 +39,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def destroy
-    @friend_request = FriendRequest.where(friend_request_params)
+    @friend_request = current_user.friend_requests.where(id: params[:id])
     @friend_request.destroy_all
     flash[:notice] = "The friend request was canceled."
     redirect_to root_url

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'posts#index'
+  post 'friend_requests/accept' => 'friend_requests#accept'
+  post 'friend_requests/reject'
 
   resources :posts do
     resources :likes
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :friend_requests do
       get :accept
+      get :reject
     end
     resources :posts
   end
